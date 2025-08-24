@@ -17,16 +17,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Enable CORS
+app.use(cors())
 // app.use(cors({ origin: "http://localhost:5174", credentials: true }));
-app.use(
-    cors({
-        origin: [
-            "http://localhost:5174", // local dev
-            /\.vercel\.app$/, // all Vercel preview + production domains
-        ],
-        credentials: true,
-    })
-);
+// app.use(
+//     cors({
+//         origin: [
+//             "http://localhost:5174", // local dev
+//             /\.vercel\.app$/, // all Vercel preview + production domains
+//         ],
+//         credentials: true,
+//     })
+// );
 
 app.use(express.json());
 
@@ -45,7 +46,7 @@ app.post("/api/validate-date", (req, res) => {
     }
 
     // ✅ Normal user date
-    if (date === "12-06-1996") {
+    if (date === "29-10-1996") {
         const token = jwt.sign({ role: "user" }, SECRET_KEY, { expiresIn: "1h" });
 
         return res.json({
